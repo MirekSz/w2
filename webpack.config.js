@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const fs = require('fs');
-function root(__path ) {
+function root(__path) {
     return path.join(__dirname, __path);
 }
 function getManifest(__path) {
@@ -13,12 +13,12 @@ function getManifest(__path) {
     return manifest;
 }
 function getDllAssets(chunk) {
-    var assets =  tryDll(() => require(root('./dist/webpack-assets.json')));
+    var assets = tryDll(() => require(root('./dist/webpack-assets.json')));
     // {"vendors":{"js":"vendors.js"},"polyfills":{"js":"polyfills.js"}}
     return assets[chunk]['js'];
 }
 function getAssets(chunk) {
-    var assets =  tryDll(() => require(root('./dist/dll/webpack-assets.json')));
+    var assets = tryDll(() => require(root('./dist/dll/webpack-assets.json')));
     // {"vendors":{"js":"vendors.js"},"polyfills":{"js":"polyfills.js"}}
     return assets[chunk]['js'];
 }
@@ -26,7 +26,7 @@ function tryDll(cb) {
     try {
         return cb();
     } catch (e) {
-        console.info("Initializing `%s`...", "DLL files",e);
+        console.info("Initializing `%s`...", "DLL files", e);
         var spawn = require('cross-spawn');
         spawn.sync("npm", ["run", "dll"], {stdio: "inherit"});
         return cb();
@@ -35,14 +35,21 @@ function tryDll(cb) {
 }
 const config = {
     cache: true,
-    entry: ['./src/index.js'],
+    entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js',
-        publicPath: 'temp/' // for webpack-dev-server output
+        publicPath: '/temp/' // for webpack-dev-server output
     },
     module: {
-        rules: [{test: /\.(js|es6)$/, use: 'babel-loader'}, {test: /\.(hbs)$/, use: 'handlebars-loader'}]
+        rules: [{test: /\.(js|es6)$/, use: 'babel-loader'}, {test: /\.(hbs)$/, use: 'handlebars-loader'}, {
+            test: /\.less$/,
+            use: [
+                'style-loader',
+                {loader: 'css-loader', options: {importLoaders: 1}},
+                'less-loader'
+            ]
+        }]
     },
     resolve: {
         alias: {
@@ -51,50 +58,51 @@ const config = {
     },
     devtool: 'cheap-module-eval-source-map',
     // devtool: 'source-map',
-    devServer: {
-        contentBase: path.join(__dirname, "dev"),
-        compress: true,
-        port: 9000,
-        setup: function(app) {
-
-            app.get('/dll/*', function(req, res) {
-                console.log('asdasd')
-                var files = req.path.split('/');
-                var chunk = files[files.length - 1].replace('.js', '');
-                if (chunk.split('.').length < 2) {
-                    res.sendFile(root('dist/dll/' + getDllAssets(chunk)));
-                } else {
-                    res.sendFile(root('dist/dll/' + chunk+'.js'));
-                }
-            });
-        },
-    },
+//    devServer: {
+//        contentBase: path.join(__dirname, "dev"),
+//        compress: true,
+//        port: 9000,
+//        setup: function (app) {
+//
+//            app.get('/dll/*', function (req, res) {
+//                console.log('asdasd')
+//                var files = req.path.split('/');
+//                var chunk = files[files.length - 1].replace('.js', '');
+//                if (chunk.split('.').length < 2) {
+//                    res.sendFile(root('dist/dll/' + getDllAssets(chunk)));
+//                } else {
+//                    res.sendFile(root('dist/dll/' + chunk + '.js'));
+//                }
+//            });
+//        },
+//    },
     // performance:{
     //     maxAssetSize: 100,
     //     maxEntrypointSize: 300,
     //     hints: 'warning',
     // },
-    plugins:[
+    plugins: [
         new webpack.DllReferencePlugin({
             scope: "alpha",
             context: path.join(__dirname, "dist", "dll"),
-        manifest:  require('./dist/dll/polyfills-manifest.json'),
-    }),
+            manifest: require('./dist/dll/polyfills-manifest.json'),
+        }),
         new webpack.DllReferencePlugin({
             scope: "beta",
             context: path.join(__dirname, "dist", "dll"),
-            manifest:  require('./dist/dll/vendor-manifest.json'),
+            manifest: require('./dist/dll/vendor-manifest.json'),
         }),
-    //     new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'vendor',
-    //     minChunks: Infinity,
-    //     filename: 'vendor.bundle.js'
-    // }),
+        //     new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     minChunks: Infinity,
+        //     filename: 'vendor.bundle.js'
+        // }),
         new webpack.NamedModulesPlugin(),
         new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-    }),
+            minimize: true,
+            debug: false
+        }),
+        new webpack.HotModuleReplacementPlugin()
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         warnings: false,
@@ -112,7 +120,7 @@ const config = {
         //         comments: false,
         //     },
         // })
-   ]
+    ]
 };
 
 module.exports = config;
