@@ -1,13 +1,9 @@
 import {hello} from 'src/helloWorld';
 
 "use strict";
-import LoggerFactory from './modules/core/lib/LoggerFactory';
-import _get from 'lodash/object/get';
-
 import style from './main.less';
 
 /*global global*/
-global.logger = LoggerFactory;
 
 /**
  * Remove item from array

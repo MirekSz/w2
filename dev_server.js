@@ -21,7 +21,7 @@ var agent = new Agent({
 var proxy = httpProxy.createProxyServer({agent: agent});
 
 process.on('uncaughtException', function (exception) {
-    //ignore crash process
+    console.log(exception)
 });
 function apiProxy(host, port) {
     return function (req, res, next) {
