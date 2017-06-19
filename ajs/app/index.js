@@ -1,9 +1,9 @@
 let app = angular.module('app', ['ui.router']);
 app.controller('PersonController', function () {
-    this.person = {name: 'mirek'}
+    this.person = { name: 'mirek' }
 });
 app.config(function ($stateProvider, $urlServiceProvider) {
-    $urlServiceProvider.rules.otherwise({state: 'userlist'});
+    $urlServiceProvider.rules.otherwise({ state: 'userlist' });
 
     $stateProvider.state('userlist', {
         url: '/users',
@@ -17,12 +17,23 @@ app.config(function ($stateProvider, $urlServiceProvider) {
 
     $stateProvider.state('userlist.detail', {
         url: '/:userId',
-        component: 'userDetail',
+        views: {
+            'main': {
+                component: 'userDetail'
+            },
+              'b': {
+                component: 'userDetail'
+            }
+        },
         resolve: {
             user: function ($transition$, users) {
-                return users.find(user => user.id == $transition$.params().userId);
+                debugger
+                var res = users.find(user => user.id == $transition$.params().userId);
+                console.log('res', res);
+                return res;
             }
         }
+
     });
 
 });
@@ -30,12 +41,12 @@ app.config(function ($stateProvider, $urlServiceProvider) {
 app.service('UserService', function ($http) {
     return {
         list: function () {
-            return $http.get('./data/users.json', {cache: true}).then(resp => resp.data)
+            return $http.get('./data/users.json', { cache: true }).then(resp => resp.data)
         }
     };
 });
 
 // preload resources in case plunker times out
 app.run(function ($http, $templateRequest) {
-    $http.get('data/users.json', {cache: true});
+    $http.get('data/users.json', { cache: true });
 })

@@ -7,7 +7,6 @@ angular.module('app')
 
             }
             this.showD = function () {
-                debugger;
                 alert('showD ' + JSON.stringify(this.user));
             }
         },
