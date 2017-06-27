@@ -19,38 +19,56 @@ export async function wypad() {
     console.log('wypad');
     $(document.body).append('wypad');
 }
+/**
+ * @return {Promise<{name:string,age:number}>}
+ * @throws {{jeb:boolean,msg:string}}
+ */
 export async function wypad2() {
     console.log('wypad2');
+    if (2 > 1) {
+        return new Date();
+    }
     $(document.body).append('wypad2 ' + new Date() + ' ');
+    throw null;
 }
+wypad2().then((data) => {
+
+}).catch((e) => {
+})
 var nodes = [];
-nodes.push({name:'root',"metadata": {
-    "streaming": 100
-}, "metrics": {
-    "normal": 41515.944}, "renderer": "global"});
+nodes.push({
+    name: 'root', "metadata": {
+        "streaming": 100
+    }, "metrics": {
+        "normal": 41515.944
+    }, "renderer": "global"
+});
 var connections = [];
 
-prepareFlow(flow,flow.nodes);
-function prepareFlow(parent,children) {
-    if (!children){
+prepareFlow(flow, flow.nodes);
+function prepareFlow(parent, children) {
+    if (!children) {
         debugger
     }
     console.log(children)
     for (let child of children) {
-        nodes.push({name: child.text,"metadata": {
-            "streaming": 100
-        }, "metrics": {
-            "normal": 41515.944}, "renderer": "focusedChild"});
-        connections.push({source:parent.text,target:child.text, metrics: {normal: 100}, "renderer": "focusedChild"});
+        nodes.push({
+            name: child.text, "metadata": {
+                "streaming": 100
+            }, "metrics": {
+                "normal": 41515.944
+            }, "renderer": "focusedChild"
+        });
+        connections.push({ source: parent.text, target: child.text, metrics: { normal: 100 }, "renderer": "focusedChild" });
         if (child.nodes.length > 0) {
-            prepareFlow(child,child.nodes);
+            prepareFlow(child, child.nodes);
         }
     }
 }
 import Vizceral from 'vizceral';
 $(document.body).ready(() => {
     const viz = new Vizceral(document.getElementById('vizceral'));
-// Add event handlers for the vizceral events
+    // Add event handlers for the vizceral events
     viz.on('viewChanged', view => {
     });
     viz.on('objectHighlighted', object => {

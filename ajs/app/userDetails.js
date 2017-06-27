@@ -7,7 +7,7 @@ angular.module('app')
 
             }
             this.showD = function () {
-                alert('showD ' + JSON.stringify(this.user));
+                alert('show ' + JSON.stringify(this.user));
             }
         },
         templateUrl: 'app/userDetails.html'
