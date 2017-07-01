@@ -29,59 +29,13 @@ const config = {
         }
     },
     devtool: 'cheap-module-eval-source-map',
-    // devtool: 'source-map',
-//    devServer: {
-//        contentBase: path.join(__dirname, "dev"),
-//        compress: true,
-//        port: 9000,
-//        setup: function (app) {
-//
-//            app.get('/dll/*', function (req, res) {
-//                console.log('asdasd')
-//                var files = req.path.split('/');
-//                var chunk = files[files.length - 1].replace('.js', '');
-//                if (chunk.split('.').length < 2) {
-//                    res.sendFile(root('dist/dll/' + getDllAssets(chunk)));
-//                } else {
-//                    res.sendFile(root('dist/dll/' + chunk + '.js'));
-//                }
-//            });
-//        },
-//    },
-    // performance:{
-    //     maxAssetSize: 100,
-    //     maxEntrypointSize: 300,
-    //     hints: 'warning',
-    // },
     plugins: [
-        //     new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'vendor',
-        //     minChunks: Infinity,
-        //     filename: 'vendor.bundle.js'
-        // }),
         new webpack.NamedModulesPlugin(),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
         }),
         new webpack.HotModuleReplacementPlugin()
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //         screw_ie8: true,
-        //         conditionals: true,
-        //         unused: true,
-        //         comparisons: true,
-        //         sequences: true,
-        //         dead_code: true,
-        //         evaluate: true,
-        //         if_return: true,
-        //         join_vars: true,
-        //     },
-        //     output: {
-        //         comments: false,
-        //     },
-        // })
     ]
 };
 

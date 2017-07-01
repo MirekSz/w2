@@ -2,8 +2,6 @@
   "main": "./src/index.js",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack -p --config prod.webpack.config.js --env.ENV production",
-    "build dll": "webpack  --config dll.webpack.config.js --env.ENV development",
     "development": "node dev_server.js"
   },
   "devDependencies": {
