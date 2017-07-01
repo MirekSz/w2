@@ -14,7 +14,7 @@ const config = {
         publicPath: '/temp/' // for webpack-dev-server output
     },
     module: {
-        rules: [{test: /\.(js|es6)$/, use: 'babel-loader'}, {test: /\.(hbs)$/, use: 'handlebars-loader'}, {
+        rules: [{test: /\.(js|es6|jsx)$/, use: 'babel-loader'}, {test: /\.(hbs)$/, use: 'handlebars-loader'}, {
             test: /\.less$/,
             use: [
                 'style-loader',

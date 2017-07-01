@@ -1,13 +1,15 @@
 import template from './cos.hbs';
 import first from 'lodash-es/first';
+import app from './App.jsx';
 
-
+app($("#react"));
 console.log(first([1, 2, 3]));
 
 //import {eventBus, events} from './modules/core/lib/EventBus';
 //
 //import site from './modules/core/site/Site';
 //
+
 export function hello() {
     console.log('Hello World ' + template());
 }
@@ -19,11 +21,11 @@ asyncFunction().then(() => {
 export async function asyncFunction() {
     await innerAsyncFunction();
     console.log('asyncFunction');
-    document.body.innerHTML = document.body.innerHTML + '</br>' + new Date() + ' asynchFunction';
+    $("#workspace").append('</br>' + new Date() + ' asynchFunction');
 }
 export async function innerAsyncFunction() {
     console.log('innerAsyncFunction');
-    document.body.innerHTML = '' + new Date() + ' innerAsyncFunction ';
+    $("#workspace").append(new Date() + ' innerAsyncFunction ');
     await time(2000);
 }
 
