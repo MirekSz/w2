@@ -66,11 +66,15 @@ class ShoppingList extends React.Component {
                 <Badge badgeContent={items2.length} primary={true} >
                     <NotificationsIcon />
                 </Badge>
-                <List>{items2}</List>
                 <h1>Shopping List for</h1>
-                <ul>
-                    {items}
-                </ul>
+                <div className="col-xs-6">
+                    <List>{items2}</List>
+                </div>
+                <div className="col-xs-6">
+                    <ul>
+                        {items}
+                    </ul>
+                </div>
             </div>
         );
     }
