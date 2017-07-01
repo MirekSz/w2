@@ -1,5 +1,5 @@
 function square(n) {
-    return n*n;
+    return n * n;
 }
-console.log('mirek')
+console.log('mirek');
 module.exports = square;

@@ -1,32 +1,36 @@
 import template from './cos.hbs';
 import first from 'lodash-es/first';
-//require('alpha/node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime');
-//require('beta/vendor');
+
 
 console.log(first([1, 2, 3]));
 
-import {eventBus, events} from './modules/core/lib/EventBus';
-
-import site from './modules/core/site/Site';
-
-import core from './modules/core/_initialize';
-import opal from './modules/opal/_initialize';
-import samil from './modules/samil/_initialize';
-import sidow from './modules/sidow/_initialize';
-import vedas from './modules/vedas/_initialize';
-
+//import {eventBus, events} from './modules/core/lib/EventBus';
+//
+//import site from './modules/core/site/Site';
+//
 export function hello() {
     console.log('Hello World ' + template());
-    wypad();
 }
+asyncFunction().then(() => {
+    console.log('done')
+});
 
 
-export async function wypad() {
-    await wypad2();
-    console.log('wypad');
-    document.body.innerHTML = document.body.innerHTML + ' wypad'
+export async function asyncFunction() {
+    await innerAsyncFunction();
+    console.log('asyncFunction');
+    document.body.innerHTML = document.body.innerHTML + '</br>' + new Date() + ' asynchFunction';
 }
-export async function wypad2() {
-    console.log('wypad2');
-    document.body.innerHTML = 'wypad2' + new Date()
+export async function innerAsyncFunction() {
+    console.log('innerAsyncFunction');
+    document.body.innerHTML = '' + new Date() + ' innerAsyncFunction ';
+    await time(2000);
+}
+
+function time(wait) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, wait);
+    });
 }

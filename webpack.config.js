@@ -5,37 +5,9 @@ const fs = require('fs');
 function root(__path) {
     return path.join(__dirname, __path);
 }
-function getManifest(__path) {
-    var __fs = fs || require('fs');
-    var manifest = tryDll(() => JSON.parse(__fs.readFileSync(root('./dist/dll/' + __path + '-manifest.json'), 'utf8')
-    // TODO(gdi2290): workaround until webpack fixes dll generation
-        .replace(/}(.*[\n\r]\s*)}(.*[\n\r]\s*)}"activeExports": \[\]/, '')));
-    return manifest;
-}
-function getDllAssets(chunk) {
-    var assets = tryDll(() => require(root('./dist/webpack-assets.json')));
-    // {"vendors":{"js":"vendors.js"},"polyfills":{"js":"polyfills.js"}}
-    return assets[chunk]['js'];
-}
-function getAssets(chunk) {
-    var assets = tryDll(() => require(root('./dist/dll/webpack-assets.json')));
-    // {"vendors":{"js":"vendors.js"},"polyfills":{"js":"polyfills.js"}}
-    return assets[chunk]['js'];
-}
-function tryDll(cb) {
-    try {
-        return cb();
-    } catch (e) {
-        console.info("Initializing `%s`...", "DLL files", e);
-        var spawn = require('cross-spawn');
-        spawn.sync("npm", ["run", "dll"], {stdio: "inherit"});
-        return cb();
-        // throw new Error('Please run `npm run dll` first before building or running the server');
-    }
-}
 const config = {
     cache: true,
-    entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],
+    entry: ['babel-polyfill', './src/index.js', 'webpack-hot-middleware/client?reload=true'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js',
@@ -82,16 +54,6 @@ const config = {
     //     hints: 'warning',
     // },
     plugins: [
-        new webpack.DllReferencePlugin({
-            scope: "alpha",
-            context: path.join(__dirname, "dist", "dll"),
-            manifest: require('./dist/dll/polyfills-manifest.json'),
-        }),
-        new webpack.DllReferencePlugin({
-            scope: "beta",
-            context: path.join(__dirname, "dist", "dll"),
-            manifest: require('./dist/dll/vendor-manifest.json'),
-        }),
         //     new webpack.optimize.CommonsChunkPlugin({
         //     name: 'vendor',
         //     minChunks: Infinity,

@@ -38,10 +38,10 @@ function apiProxy(host, port) {
 app.use(apiProxy('localhost', port));
 
 app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
+    noInfo: false,
     quiet: false,
     reload: true,
-    stats: {colors: true},
+    stats: true,
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000,
@@ -52,9 +52,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 app.get('/', (req, res) => {
+    console.log('/')
     res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 app.get('*', (req, res) => {
+    console.log('*')
     res.sendFile(path.join(__dirname, req.originalUrl.split('?')[0]));
 });
 
