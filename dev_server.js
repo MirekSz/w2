@@ -8,6 +8,7 @@ var compiler = webpack(config);
 var port = process.env.PORT || 5001;
 
 process.on('uncaughtException', function (exception) {
+    console.log(exception)
     //ignore crash process
 });
 

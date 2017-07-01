@@ -8,7 +8,7 @@ setTimeout(() => {
 class AppContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {items: [1, 2]};
+        this.state = { items: [1, 2] };
     }
 
     componentDidMount() {
@@ -25,11 +25,18 @@ class AppContainer extends React.Component {
     render() {
         return (
             <div >
-                <ShoppingList {...this.state}/>
+                <ShoppingList {...this.state} />
             </div>
         );
     }
 }
+
+
+function Square(props) {
+    return (<h2>Hello, {props.name}</h2>);
+}
+
+
 class ShoppingList extends React.Component {
     add() {
         ee.emit('addItem', null)
@@ -37,7 +44,7 @@ class ShoppingList extends React.Component {
 
     render() {
         var items = this.props.items.map((i) => {
-            return (<li key={i}>{i}</li>);
+            return (<Square key={i} name={i} />);
         });
         return (
             <div className="shopping-list">
@@ -52,6 +59,7 @@ class ShoppingList extends React.Component {
 }
 
 
+
 export default function render(where) {
-    ReactDOM.render(<AppContainer/>, $(where)[0])
+    ReactDOM.render(<AppContainer />, $(where)[0])
 }
