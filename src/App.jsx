@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Form from './Form.jsx';
 import * as emiter from 'event-emitter';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -33,9 +34,11 @@ class AppContainer extends React.Component {
     render() {
         return (<MuiThemeProvider>
             <div >
+                <Form></Form>
+                <Ife val={2 > 1}>children content</Ife>
                 <ShoppingList {...this.state} />
             </div>
-        </MuiThemeProvider>
+        </MuiThemeProvider >
         );
     }
 }
@@ -44,7 +47,12 @@ class AppContainer extends React.Component {
 function Square(props) {
     return (<h2>Hello, {props.name}</h2>);
 }
-
+function Ife(props) {
+    if (props.val === true) {
+        return (<h1>{props.children}</h1>);
+    }
+    return null;
+}
 
 class ShoppingList extends React.Component {
     add() {
