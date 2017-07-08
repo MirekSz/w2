@@ -21,7 +21,7 @@ const config = {
                 { loader: 'css-loader', options: { importLoaders: 1 } },
                 'less-loader'
             ]
-        }]
+        }, { test: /\.(ts)$/, use: 'ts-loader' }]
     },
     resolve: {
         alias: {

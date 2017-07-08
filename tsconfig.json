@@ -1,0 +1,22 @@
+{
+      "compilerOptions": {
+            "module": "es6",
+            "target": "es5",
+            "noImplicitReturns": true,
+            "noImplicitAny": true,
+            "removeComments": true,
+            "preserveConstEnums": true,
+            "sourceMap": true,
+            "jsx": "react",
+            "moduleResolution": "node",
+            "traceResolution": true,
+            "lib": [
+                  "dom",
+                  "es2015.promise",
+                  "es5"
+            ]
+      },
+      "exclude": [
+            "node_modules"
+      ]
+}
