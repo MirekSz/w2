@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import template from './cos.hbs';
 
 export default class Customer {
       private name: string;
@@ -7,7 +8,7 @@ export default class Customer {
       }
       hello(a: string) {
             var r = 5;
-            console.log(this)
+            console.log(this, template());
             return "asd";
       }
 
