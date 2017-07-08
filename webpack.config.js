@@ -7,18 +7,18 @@ function root(__path) {
 }
 const config = {
     cache: true,
-    entry: ['babel-polyfill', './src/index.js', 'webpack-hot-middleware/client?reload=true'],
+    entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js',
         publicPath: '/temp/' // for webpack-dev-server output
     },
     module: {
-        rules: [{test: /\.(js|es6|jsx)$/, use: 'babel-loader'}, {test: /\.(hbs)$/, use: 'handlebars-loader'}, {
+        rules: [{ test: /\.(js|es6|jsx)$/, use: 'babel-loader' }, { test: /\.(hbs)$/, use: 'handlebars-loader' }, {
             test: /\.less$/,
             use: [
                 'style-loader',
-                {loader: 'css-loader', options: {importLoaders: 1}},
+                { loader: 'css-loader', options: { importLoaders: 1 } },
                 'less-loader'
             ]
         }]

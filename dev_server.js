@@ -17,6 +17,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
     quiet: false,
     reload: true,
     stats: true,
+    overlay: true,
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000,

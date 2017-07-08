@@ -1,7 +1,7 @@
 /**
  * Main flow file
  **/
-import {eventBus, events} from './modules/core/lib/EventBus';
+import { eventBus, events } from './modules/core/lib/EventBus';
 
 import site from './modules/core/site/Site';
 
@@ -34,11 +34,10 @@ const Main = {
 
         site.start();
     },
-
     startDeveloperMode() {
         eventBus.addListener(events.SIDEBAR.SIDEBAR_READY, () => {
             eventBus.send(events.GLOBAL_EVENT.CORE_MODULE_LOADED, {});
-        });
+        })  ;
 
         site.startDeveloperMode();
     }
