@@ -93,14 +93,23 @@ class ShoppingList extends React.Component {
 class About extends React.Component {
 
     render() {
-        return (<div>about</div>)
+        return (<div>about {this.props.sub} <a class="btn btn-default" href="about/subabout" data-navigo>subabout</a>
+        </div>)
     }
+
+    componentDidMount() {
+        router.updatePageLinks();
+    }
+
 }
+
+var root = null;
+var useHash = true; // Defaults to: false
+var hash = '#!'; // Defaults to: '#'
+var router = new Navigo(root, useHash, hash);
+
 export default function render(where) {
-    var root = null;
-    var useHash = true; // Defaults to: false
-    var hash = '#!'; // Defaults to: '#'
-    var router = new Navigo(root, useHash, hash);
+
     router.hooks({
         before: (done, params) => {
             ReactDOM.unmountComponentAtNode($("#app")[0])
@@ -124,6 +133,8 @@ export default function render(where) {
             ReactDOM.render(<AppContainer />, $("#app")[0])
         }).on('/about', function () {
         ReactDOM.render(<About />, $("#app")[0])
+    }).on('/about/subabout', function () {
+        ReactDOM.render(<About sub="true"/>, $("#app")[0])
     }).on('/form', function () {
         ReactDOM.render(<Form />, $("#app")[0])
     }).on(function () {
