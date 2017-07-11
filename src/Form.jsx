@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { form: {} }
+        this.state = {form: {}};
         this.updateState = this.updateState.bind(this);
     }
 
@@ -12,7 +12,15 @@ export default class Form extends React.Component {
     updateState(path, value) {
         let form = this.state.form;
         form[path] = value;
-        this.setState({ form: form });
+        this.setState({form: form});
+    }
+
+    componentDidMount() {
+        console.log('start: ');
+    }
+
+    componentWillUnmount() {
+        console.log('stop: ');
     }
 
     render() {
@@ -20,11 +28,11 @@ export default class Form extends React.Component {
         return (<div className="container">
             tu={j}
             <Row>
-                <Field label="First name" bind={this.state.form} path="fn" onValChange={this.updateState} />
-                <Field label="Last name" bind={this.state.form} path="ln" onValChange={this.updateState} />
+                <Field label="First name" bind={this.state.form} path="fn" onValChange={this.updateState}/>
+                <Field label="Last name" bind={this.state.form} path="ln" onValChange={this.updateState}/>
             </Row>
-            <Field label="First name" bind={this.state.form} path="fn" onValChange={this.updateState} />
-            <Field label="Last name" bind={this.state.form} path="ln" onValChange={this.updateState} />
+            <Field label="First name" bind={this.state.form} path="fn" onValChange={this.updateState}/>
+            <Field label="Last name" bind={this.state.form} path="ln" onValChange={this.updateState}/>
             <button className="btn btn-primary">Submit</button>
         </div>)
     }
@@ -37,7 +45,7 @@ class Row extends React.Component {
     render() {
         let length = this.props.children.length;
         return (
-            <div>{React.Children.map(this.props.children, child => React.cloneElement(child, { elementsInRow: length }))}</div>);
+            <div>{React.Children.map(this.props.children, child => React.cloneElement(child, {elementsInRow: length}))}</div>);
     }
 }
 class Field extends React.Component {
@@ -56,7 +64,7 @@ class Field extends React.Component {
         return (<div className={'form-group col-xs-' + classForColumns}>
             <label >{this.props.label}</label>
             <input type="text" className="form-control" value={this.props.bind[this.props.path]}
-                onChange={this.handleChange} />
+                   onChange={this.handleChange}/>
         </div>);
     }
 }

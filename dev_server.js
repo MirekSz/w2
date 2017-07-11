@@ -18,6 +18,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
     reload: true,
     stats: true,
     overlay: true,
+    historyApiFallback: true,
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000,
