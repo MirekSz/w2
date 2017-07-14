@@ -14,14 +14,17 @@ const config = {
         publicPath: '/temp/' // for webpack-dev-server output
     },
     module: {
-        rules: [{ test: /\.(js|es6|jsx)$/, use: 'babel-loader' }, { test: /\.(hbs)$/, use: 'handlebars-loader' }, {
+        rules: [{test: /\.(js|es6|jsx)$/, use: 'babel-loader', exclude: /node_modules/,}, {
+            test: /\.(hbs)$/,
+            use: 'handlebars-loader'
+        }, {
             test: /\.less$/,
             use: [
                 'style-loader',
-                { loader: 'css-loader', options: { importLoaders: 1 } },
-                'less-loader'
+                {loader: 'css-loader', options: {importLoaders: 1}},
+                'less-loader',
             ]
-        }, { test: /\.(ts)$/, use: 'ts-loader' }]
+        }, {test: /\.(ts)$/, use: 'ts-loader', exclude: /node_modules/}]
     },
     resolve: {
         alias: {

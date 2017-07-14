@@ -4,7 +4,7 @@ import Form from './Form.jsx';
 import * as emiter from 'event-emitter';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import { List, ListItem } from 'material-ui/List';
+import {List, ListItem} from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
@@ -19,7 +19,7 @@ setTimeout(() => {
 class AppContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [1, 2] };
+        this.state = {items: [1, 2]};
     }
 
     componentDidMount() {
@@ -35,11 +35,11 @@ class AppContainer extends React.Component {
 
     render() {
         return (<MuiThemeProvider>
-            <div >
-                <Ife val={2 > 1}>children content</Ife>
-                <ShoppingList {...this.state} />
-            </div>
-        </MuiThemeProvider >
+                <div >
+                    <Ife val={2 > 1}>children content</Ife>
+                    <ShoppingList {...this.state} />
+                </div>
+            </MuiThemeProvider >
         );
     }
 }
@@ -62,15 +62,15 @@ class ShoppingList extends React.Component {
 
     render() {
         var items = this.props.items.map((i) => {
-            return (<Square key={i} name={i} />);
+            return (<Square key={i} name={i}/>);
         });
         var items2 = this.props.items.map((i) => {
             return (<ListItem key={i}><h3>{i}</h3></ListItem>);
         });
         return (
             <div className="shopping-list">
-                <TextField defaultValue="Item text" ref="_input" />
-                <RaisedButton label="Add" primary="true" onClick={this.add.bind(this)} />
+                <TextField defaultValue="Item text" ref="_input"/>
+                <RaisedButton label="Add" primary="true" onClick={this.add.bind(this)}/>
                 <br />
                 <Badge badgeContent={items2.length} primary={true}>
                     <NotificationsIcon />
@@ -93,8 +93,9 @@ class ShoppingList extends React.Component {
 class About extends React.Component {
 
     render() {
-        return (<div>about {this.props.sub} <a className="btn btn-success" href="about/subabout" data-navigo>subabout</a>
-        </div>)
+        return (
+            <div>about {this.props.sub} <a className="btn btn-success" href="about/subabout" data-navigo>subabout</a>
+            </div>)
     }
 
     componentDidMount() {
@@ -114,6 +115,9 @@ export default function render(where) {
         before: (done, params) => {
             ReactDOM.unmountComponentAtNode($("#app")[0])
             done();
+        },
+        after: (params) => {
+
         }
     });
 
@@ -135,13 +139,13 @@ export default function render(where) {
         .on('/app', function () {
             ReactDOM.render(<AppContainer />, $("#app")[0])
         }).on('/about', function () {
-            ReactDOM.render(<About />, $("#app")[0])
-        }).on('/about/subabout', function () {
-            ReactDOM.render(<About sub="true" />, $("#app")[0])
-        }).on('/form', function () {
-            ReactDOM.render(<Form />, $("#app")[0])
-        }).on(function () {
-        }).resolve();
+        ReactDOM.render(<About />, $("#app")[0])
+    }).on('/about/subabout', function () {
+        ReactDOM.render(<About sub="true"/>, $("#app")[0])
+    }).on('/form', function () {
+        ReactDOM.render(<Form />, $("#app")[0])
+    }).on(function () {
+    }).resolve();
 }
 
 
