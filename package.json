@@ -20,6 +20,7 @@
     "express": "^4.15.3",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
+    "react-addons-perf": "^15.4.2",
     "style-loader": "^0.13.2",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
