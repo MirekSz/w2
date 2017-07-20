@@ -42,6 +42,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-tap-event-plugin": "^2.0.1",
-    "router_js": "^1.2.8"
+    "router_js": "^1.2.8",
+    "rxjs": "^5.4.2"
   }
 }

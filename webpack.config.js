@@ -2,9 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 
 const fs = require('fs');
+
 function root(__path) {
     return path.join(__dirname, __path);
 }
+
 const config = {
     cache: true,
     entry: ['./src/index.js', 'webpack-hot-middleware/client?reload=true'],
@@ -25,12 +27,13 @@ const config = {
                 'less-loader',
             ]
         }, {test: /\.(ts)$/, use: 'ts-loader', exclude: /node_modules/},
-    {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      }]
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }]
     },
     resolve: {
+        extensions: ['.js', '.jsx'],
         alias: {
             src: path.resolve(__dirname, 'src')
         }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from './Form.jsx';
-import About from './About.jsx';
+import About from './about/About.jsx';
 import * as emiter from 'event-emitter';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -102,10 +102,9 @@ var hash = '#!'; // Defaults to: '#'
 var router = new Navigo(root, useHash, hash);
 //as
 export default function render(where) {
-
     router.hooks({
         before: (done, params) => {
-            ReactDOM.unmountComponentAtNode($("#app")[0])
+            ReactDOM.unmountComponentAtNode($("#app")[0]);
             done();
         },
         after: (params) => {
@@ -126,7 +125,6 @@ export default function render(where) {
                         </div>
                         </div>
                         </div>`);
-    router.updatePageLinks();
     router
         .on('/app', function () {
             ReactDOM.render(<AppContainer/>, $("#app")[0])
@@ -136,8 +134,8 @@ export default function render(where) {
         ReactDOM.render(<About sub="true" router={router}/>, $("#app")[0])
     }).on('/form', function () {
         ReactDOM.render(<Form/>, $("#app")[0])
-    }).on(function () {
     }).resolve();
+    router.updatePageLinks();
 }
 
 
