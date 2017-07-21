@@ -16,19 +16,21 @@ import Perf from 'react-addons-perf';
 import CalendarItem from './CalendarItem';
 
 const dataSource = ['Urlop', 'Święto', 'Opieka', 'Chorobowe'];
+
 let days = [];
 for (let i = 0; i <= 31; i++) {
     let day = {day: i, offReason: ''};
     days.push(day);
 }
-const add$ = new Rx.Subject();
-add$.debounceTime(500).distinctUntilChanged().subscribe((val) => {
-    val.stateHolder.setState({project: val.project});
-});
+
 export default class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {days, project: 'Next Verto', time: 0};
+        this.add$ = new Rx.Subject();
+        this.add$.debounceTime(500).distinctUntilChanged().subscribe((val) => {
+            this.setState({project: val.project});
+        });
     }
 
     componentWillUpdate() {
@@ -55,9 +57,9 @@ export default class About extends React.Component {
 
     }
 
-    handleUpdateInput(day, value) {
+    onOffReasonChange(day, value) {
         day.offReason = value;
-        var index = days.indexOf(day);
+        const index = days.indexOf(day);
         if (index > -1) {
             days[index] = Object.assign({}, day);
         }
@@ -65,19 +67,14 @@ export default class About extends React.Component {
     };
 
     handleProjectInput(event) {
-        event.persist();
-        add$.next({project: event.target.value, stateHolder: this});
+        this.add$.next({project: event.target.value, stateHolder: this});
     };
 
     render() {
-        // return (
-        //       <div>about {this.props.sub} <a className="btn btn-success" href="about/subabout" data-navigo>subabout</a>
-        //       </div>)
-
-        var rows = [];
+        let rows = [];
         for (let day of days) {
             rows.push(<CalendarItem day={day} project={this.state.project}
-                                    onOffReasonChange={this.handleUpdateInput.bind(this)}/>
+                                    onOffReasonChange={this.onOffReasonChange.bind(this)}/>
                 /*<TableRow>
                     <TableRowColumn>{day.day}</TableRowColumn>
                     <TableRowColumn>{this.state.project}</TableRowColumn>

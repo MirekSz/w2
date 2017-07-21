@@ -22,16 +22,17 @@ export default class CalendarItem extends React.Component {
         this.props.onOffReasonChange(day, value);
     };
 
+
     shouldComponentUpdate(nextProps, nextState) {
-        let b = nextProps.day != this.props.day || this.props.project != nextProps.project;
-        return b;
-//        return false;
+        return nextProps.day != this.props.day || this.props.project != nextProps.project;
     }
 
     render() {
         return (<TableRow>
             <TableRowColumn>{this.props.day.day}</TableRowColumn>
-            <TableRowColumn>{this.props.project}</TableRowColumn>
+            <TableRowColumn>
+                {this.props.project}
+            </TableRowColumn>
             <TableRowColumn>8</TableRowColumn>
             <TableRowColumn>0</TableRowColumn>
             <TableRowColumn> <AutoComplete
