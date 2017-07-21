@@ -19,12 +19,17 @@ export default class CalendarItem extends React.Component {
     }
 
     handleUpdateInput(day, value) {
-        this.props.onOffReasonChange(day, value);
+        day.offReason = value;
+//        this.props.onOffReasonChange(day, value);
+    };
+
+    editComplete(day, value) {
+        this.props.onOffReasonChange(this.props.day, this.props.day.offReason);
     };
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.day != this.props.day || this.props.project != nextProps.project;
+        return nextProps.day !== this.props.day || this.props.project !== nextProps.project;
     }
 
     render() {
@@ -37,6 +42,7 @@ export default class CalendarItem extends React.Component {
             <TableRowColumn>0</TableRowColumn>
             <TableRowColumn> <AutoComplete
                 onUpdateInput={this.handleUpdateInput.bind(this, this.props.day)}
+                onBlur={this.editComplete.bind(this)}
                 searchText={this.props.day.offReason}
                 filter={AutoComplete.noFilter}
                 openOnFocus={true}
