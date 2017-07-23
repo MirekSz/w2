@@ -14,6 +14,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Perf from 'react-addons-perf';
 import CalendarItem from './CalendarItem';
+import Card from './Card';
 
 const dataSource = ['Urlop', 'Święto', 'Opieka', 'Chorobowe'];
 
@@ -94,6 +95,10 @@ export default class About extends React.Component {
         return (
             <MuiThemeProvider>
                 <div>
+                    <Card>
+                        <div key="header">h</div>
+                        <div key="content"><TextField /></div>
+                    </Card>
                     <TextField floatingLabelText="Projekt" defaultValue={this.state.project}
                         onChange={this.handleProjectInput.bind(this)} />
                     <h3 className="times pull-right">Last Update Time: {this.state.time}</h3>
