@@ -16,21 +16,26 @@ const config = {
         publicPath: '/temp/' // for webpack-dev-server output
     },
     module: {
-        rules: [{test: /\.(js|es6|jsx)$/, use: 'babel-loader', exclude: /node_modules/,}, {
+        rules: [{ test: /\.(js|es6|jsx)$/, use: 'babel-loader', exclude: /node_modules/, }, {
             test: /\.(hbs)$/,
             use: 'handlebars-loader'
         }, {
             test: /\.less$/,
             use: [
                 'style-loader',
-                {loader: 'css-loader', options: {importLoaders: 1}},
+                { loader: 'css-loader', options: { importLoaders: 1 } },
                 'less-loader',
             ]
-        }, {test: /\.(ts)$/, use: 'ts-loader', exclude: /node_modules/},
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+        }, { test: /\.(ts)$/, use: 'ts-loader', exclude: /node_modules/ },
+        {
+            test: /\.css$/,
+            use: ['style-loader', {
+                loader: 'css-loader', options: {
+                    modules: true,
+                     localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                }
             }]
+        }]
     },
     resolve: {
         extensions: ['.js', '.jsx'],

@@ -1,6 +1,7 @@
 import template from './cos.hbs';
 import first from 'lodash-es/first';
 import app from './App.jsx';
+import style from './Hello.css';
 
 app($("#react"));
 console.log(first([1, 2, 3]));
@@ -25,7 +26,8 @@ export async function asyncFunction() {
 }
 export async function innerAsyncFunction() {
     console.log('innerAsyncFunction');
-    $("#workspace").append(new Date() + ' innerAsyncFunction ');
+    let d = new Date();
+    $("#workspace").append(`<span class="${style.miro}">${d}  innerAsyncFunction </span>`);
     await time(2000);
 }
 
