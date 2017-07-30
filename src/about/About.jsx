@@ -20,7 +20,7 @@ const dataSource = ['Urlop', 'Święto', 'Opieka', 'Chorobowe'];
 
 let days = [];
 for (let i = 0; i <= 31; i++) {
-    let day = { day: i, offReason: '' };
+    let day = { day: i, offReason: '', offHours: 0, workHours: 8 };
     days.push(day);
 }
 
@@ -60,6 +60,8 @@ export default class About extends React.Component {
 
     onOffReasonChange(day, value) {
         day.offReason = value;
+        day.workHours = 0;
+        day.offHours = 8;
         const index = days.indexOf(day);
         if (index > -1) {
             days[index] = Object.assign({}, day);

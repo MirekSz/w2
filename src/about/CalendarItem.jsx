@@ -20,7 +20,7 @@ export default class CalendarItem extends React.Component {
 
     handleUpdateInput(day, value) {
         day.offReason = value;
-//        this.props.onOffReasonChange(day, value);
+        //        this.props.onOffReasonChange(day, value);
     };
 
     editComplete(day, value) {
@@ -35,11 +35,11 @@ export default class CalendarItem extends React.Component {
     render() {
         return (<TableRow>
             <TableRowColumn>{this.props.day.day}</TableRowColumn>
-            <TableRowColumn>
+            <TableRowColumn >
                 {this.props.project}
             </TableRowColumn>
-            <TableRowColumn>8</TableRowColumn>
-            <TableRowColumn>0</TableRowColumn>
+            <TableRowColumn>{this.props.day.workHours}</TableRowColumn>
+            <TableRowColumn>{this.props.day.offHours}</TableRowColumn>
             <TableRowColumn> <AutoComplete
                 onUpdateInput={this.handleUpdateInput.bind(this, this.props.day)}
                 onBlur={this.editComplete.bind(this)}
