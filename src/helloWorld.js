@@ -20,6 +20,7 @@ asyncFunction().then(() => {
 
 
 export async function asyncFunction() {
+    debugger;
     await innerAsyncFunction();
     console.log('asyncFunction');
     $("#workspace").append('</br>' + new Date() + ' asynchFunction');

@@ -2,9 +2,9 @@ import * as _ from 'lodash';
 import template from './cos.hbs';
 import ee from 'event-emitter';
 let e = new ee();
-e.addListener('dupa', (data) => {
+// e.addListener('dupa', (data) => {
 
-})
+// })
 e.emit('asd', {});
 export default class Customer {
       private name: string;

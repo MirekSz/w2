@@ -6,7 +6,6 @@ declare module "*.hbs" {
     const _: Callable;
     export default _;
 }
-
 declare module 'event-emitter' {
     class EE {
         constructor();

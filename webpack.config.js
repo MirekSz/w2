@@ -23,7 +23,7 @@ const config = {
             test: /\.less$/,
             use: [
                 'style-loader',
-                { loader: 'css-loader', options: { importLoaders: 1 } },
+                { loader: 'css-loader', options: { importLoaders: 1, url: true } },
                 'less-loader',
             ]
         }, { test: /\.(ts)$/, use: 'ts-loader', exclude: /node_modules/ },
@@ -32,9 +32,17 @@ const config = {
             use: ['style-loader', {
                 loader: 'css-loader', options: {
                     modules: true,
-                     localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                    url: false,
+                    localIdentName: '[path][name]__[local]--[hash:base64:5]'
                 }
             }]
+        },
+        {
+            test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 100
+            }
         }]
     },
     resolve: {

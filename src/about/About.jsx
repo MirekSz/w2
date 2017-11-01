@@ -14,7 +14,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Perf from 'react-addons-perf';
 import CalendarItem from './CalendarItem';
-import Card from './Card';
+import Card,{Title} from './Card';
 
 const dataSource = ['Urlop', 'Święto', 'Opieka', 'Chorobowe'];
 
@@ -98,6 +98,7 @@ export default class About extends React.Component {
             <MuiThemeProvider>
                 <div>
                     <Card>
+                        <Title>yoyoyo</Title>
                         <div key="header">h</div>
                         <div key="content"><TextField /></div>
                     </Card>
